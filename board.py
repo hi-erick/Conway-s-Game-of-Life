@@ -9,25 +9,28 @@ newState = []
 # dead or alive bool
 
 def fill():
-    for x in range(50):
-        grid.append( [None] * 50 )
-    for x in range(50):
-        newState.append( [None] * 50 )
+    for x in range(30):
+        grid.append( [None] * 30 )
+    for x in range(30):
+        newState.append( [None] * 30 )
     chars = ["O", " "]
     
-    for x in range(50):
-        for i in range(50):
+    for x in range(30):
+        for i in range(30):
             grid[x][i] =  random.choice(chars)
+
 def printGrid():
     for x in range(len(grid)):
-        for i in range(50):
+        for i in range(30):
             print(grid[x][i], end=" ")
         print()
+
 def printNewGrid():
     for x in range(len(grid)):
-        for i in range(50):
+        for i in range(30):
             print(newState[x][i], end=" ")
         print()
+
 def adjacent(a,b):
     totalAlive = 0
     if a == 0 and b == 0:
@@ -38,7 +41,7 @@ def adjacent(a,b):
         if grid[a+1][b+1] == "O":
             totalAlive += 1
         return totalAlive
-    elif a == 0 and b == 49:
+    elif a == 0 and b == 29:
         if grid[a][b-1] == "O":
             totalAlive ==1
         if grid[a+1][b-1] == "O":
@@ -46,7 +49,7 @@ def adjacent(a,b):
         if grid[a+1][b] == "O":
             totalAlive += 1
         return totalAlive
-    elif a == 49 and b == 0:
+    elif a == 29 and b == 0:
         if grid[a-1][b] == "O":
             totalAlive +=1
         if grid[a-1][b+1] == "O":
@@ -54,7 +57,7 @@ def adjacent(a,b):
         if grid[a][b+1] == "O":
             totalAlive += 1
         return totalAlive
-    elif a == 49 and b == 49:
+    elif a == 29 and b == 29:
         if grid[a][b-1] == "O":
             totalAlive += 1
         if grid[a-1][b-1] == "O":
@@ -86,7 +89,7 @@ def adjacent(a,b):
         if grid[a+1][b] == "O":
             totalAlive +=1
         return totalAlive
-    elif b == 49:
+    elif b == 29:
         if grid[a-1][b] == "O":
             totalAlive += 1
         if grid[a-1][b-1] == "O":
@@ -98,7 +101,7 @@ def adjacent(a,b):
         if grid[a+1][b] == "O":
             totalAlive +=1
         return totalAlive
-    elif a == 49:
+    elif a == 29:
         if grid[a][b-1] == "O":
             totalAlive += 1
         if grid[a-1][b-1] == "O":
@@ -128,13 +131,15 @@ def adjacent(a,b):
         if grid[a+1][b+1] == "O":
             totalAlive += 1
         return totalAlive
+
 def cellState(i,j):
     if grid[i][j] == "O":
         return True
+
 def conway():
     global grid
-    for i in range(50):
-        for j in range(50):
+    for i in range(30):
+        for j in range(30):
             totalAlive = adjacent(i,j)
             isAlive = cellState(i,j)
             if isAlive:
@@ -150,8 +155,10 @@ def conway():
                 else:
                     newState[i][j] = " "
     grid = copy.deepcopy(newState)
+
 def screen_clear():
     _ = os.system('cls')
+
 if __name__ == '__main__':
     fill()
     printGrid()
